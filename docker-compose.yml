@@ -1,0 +1,38 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ourcrm
+      MYSQL_USER: ourcrm
+      MYSQL_PASSWORD: ourcrm
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+
+  apache:
+    build:
+      context: .
+      dockerfile: ./docker/apache/Dockerfile
+    volumes:
+      - .:/var/www/html
+      - ./docker/apache/apache-config/000-default.conf:/etc/apache2/sites-available/000-default.conf
+    user: "1000:1000"
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=ourcrm
+      - DB_USERNAME=ourcrm
+      - DB_PASSWORD=ourcrm
+
+volumes:
+  db_data:
