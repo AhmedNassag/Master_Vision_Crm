@@ -31,7 +31,7 @@
                 @foreach ($pointsSettings as $pointsSetting)
                     <tr>
                         <td>{{ $pointsSetting->activity->name ?? null}}</td>
-                        <td>{{ $pointsSetting->sub_activity->name ?? null }}</td>
+                        <td>{{ $pointsSetting->subActivity->name ?? null }}</td>
                         <td>{{ $pointsSetting->conversion_rate }}  نقاط/ جنيه</td>
                         <td>{{ $pointsSetting->sales_conversion_rate }} جنيه/{{ $pointsSetting->points }} نقطة</td>
                         <td>{{ $pointsSetting->points }}</td>

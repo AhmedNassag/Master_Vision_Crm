@@ -27,22 +27,22 @@
 	<!--<div class="box-header"></div>-->
 	<div class="box-body">
 		<table id="example1" class="table table-bordered">
-		<thead>
-		<tr class="success">
-			@foreach( $listing_cols as $col )
-			<th>{{ !empty($module->fields[$col]) && !empty($module->fields[$col]['label'])? trans('admin.'.$module->fields[$col]['label']) : ucfirst($col) }}</th>
-			@endforeach
-                        @la_access("Employee_targets", "view")
-                        <th>{{trans("admin.Target")}}</th>
-                        @endla_access
-                        @if($show_actions)
-			<th>{{trans("admin.Actions")}}</th>
-			@endif
-		</tr>
-		</thead>
-		<tbody>
-			
-		</tbody>
+			<thead>
+				<tr class="success">
+					@foreach( $listing_cols as $col )
+					<th>{{ !empty($module->fields[$col]) && !empty($module->fields[$col]['label'])? trans('admin.'.$module->fields[$col]['label']) : ucfirst($col) }}</th>
+					@endforeach
+								@la_access("Employee_targets", "view")
+								<th>{{trans("admin.Target")}}</th>
+								@endla_access
+								@if($show_actions)
+					<th>{{trans("admin.Actions")}}</th>
+					@endif
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
 		</table>
 	</div>
 </div>

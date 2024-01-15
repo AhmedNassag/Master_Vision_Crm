@@ -73,8 +73,6 @@
                                     <th>{{ trans('admin.Mobile') }}</th>
                                     <th>{{ trans('admin.Email') }}</th>
                                     <th>{{ trans('admin.Company Name') }}</th>
-
-
                                 </tr>
                             </thead>
                             <tbody id="data-table-body">

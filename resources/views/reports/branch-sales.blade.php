@@ -12,8 +12,6 @@
                 <div class="panel-body">
                     <form id="report-form">
                         {{ csrf_field() }}
-                      
-
                         <div class="form-group col-md-12">
                             <label for="month">اختر شهرا</label>
                             <select id="month" name="month" class="form-control" rel='select2'>

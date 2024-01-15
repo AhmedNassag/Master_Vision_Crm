@@ -35,21 +35,21 @@ class ReportsController extends Controller
     public $month_format = 'M-Y';
     public function salesReport(Request $request)
     {
-
-
-
         $year_month = [];
-
+        
         $currentYear = date('Y'); // Get the current year
-
+        
         // Start from January of the current year
         $date = Carbon::create($currentYear, 1, 1);
+        
         for ($i = 1; $i <= date('n'); $i++) {
             $year_month[$date->format('Y-m')] = $date->format($this->month_format);
             $date->addMonth();
         }
         return view('reports.employee-sales', ['year_month' => $year_month]);
     }
+
+
 
     public function ajaxEmployeesByBranch(Request $request)
     {
@@ -61,14 +61,15 @@ class ReportsController extends Controller
         $employees = Employee::when($request->branch, function ($query) use ($request) {
             return $query->where('branch_id', $request->branch);
         })->get();
-
+        // dd($employees);
         $reportData = [];
 
-        foreach ($employees as $employee) {
+        foreach ($employees as $index=>$employee) {
             // Get the target for the current employee and year
             $target = Employee_target::where('employee_id', $employee->id)
-                ->where('month', $request->month)
+                ->where('month', Carbon::create($request->month)->format('M-Y'))
                 ->sum('target_amount');
+                
             // $targetCalls = Employee_target::where('employee_id', $employee->id)
             //     ->where('month', $request->month)
             //     ->sum('target_calls');
@@ -81,7 +82,7 @@ class ReportsController extends Controller
                 ->where(DB::raw('DATE_FORMAT(invoice_date, "%Y-%m")'), $request->month)
                 ->sum('total_amount');
 
-			$uniqueCustomerCount = Invoice::where('created_by', $employee->id)
+            $uniqueCustomerCount = Invoice::where('created_by', $employee->id)
 				->where(DB::raw('DATE_FORMAT(invoice_date, "%Y-%m")'), $request->month)
 				->distinct('customer_id')
 				->count();

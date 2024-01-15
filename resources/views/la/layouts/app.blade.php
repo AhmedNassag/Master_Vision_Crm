@@ -11,9 +11,10 @@
 
 <body
     class="{{ LAConfigs::getByKey('skin') }} {{ LAConfigs::getByKey('layout') }}
-@if (LAConfigs::getByKey('layout') == 'sidebar-mini') sidebar-collapse @endif"
+    @if (LAConfigs::getByKey('layout') == 'sidebar-mini') sidebar-collapse @endif"
     bsurl="{{ url('') }}" adminRoute="{{ config('laraadmin.adminRoute') }}"
-    style='font-family: DejaVu Sans;font-size: inherit;'>
+    style='font-family: DejaVu Sans;font-size: inherit;'
+>
 
     <style>
         .loader {
@@ -27,7 +28,6 @@
             align-items: center;
             background-color: #f7f9fb;
             transition: opacity 0.75s, visibility 0.75s;
-
         }
 
         .loader-hidden {

@@ -1,5 +1,4 @@
 <!-- resources/views/partials/excel_columns.blade.php -->
-
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -27,7 +26,6 @@
                         <option value="like">Like</option>
                     </select>
                 </td>
-
             </tr>
             @endif
         @endforeach

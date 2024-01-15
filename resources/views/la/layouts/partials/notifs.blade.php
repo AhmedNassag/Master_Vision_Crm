@@ -39,13 +39,13 @@
                                 @php
                                 if(Auth::user())
                                 {
-                                $user=Auth::user();
-                                $notifications = App\Models\Notification::where("employee_id",$user->context_id)->
-                                        orWhere("dept",$user->employee->dept)->
-                                        orWhere(function($q) use($user){
-                                            $q->where("dept",0)->where("employee_id",0);
-                                        })->orderBy("created_at","desc")->get();
-                                        }
+                                	$user=Auth::user();
+                                	$notifications = App\Models\Notification::where("employee_id",$user->context_id)->
+									orWhere("dept",$user->employee->dept)->
+									orWhere(function($q) use($user){
+										$q->where("dept",0)->where("employee_id",0);
+									})->orderBy("created_at","desc")->get();
+                                }
                                 @endphp
                                 @if(!empty($notifications) && count($notifications)>0)
 				<!-- Notifications Menu -->

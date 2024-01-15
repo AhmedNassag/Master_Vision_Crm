@@ -337,7 +337,7 @@ class ContactsController extends Controller
 	{
 
 		if (Module::hasAccess("Contacts", "create")) {
-
+			
 			$rules = Module::validateRules("Contacts", $request);
 
 			$validator = Validator::make($request->all(), $rules);
@@ -345,6 +345,7 @@ class ContactsController extends Controller
 			if ($validator->fails()) {
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
+			
 			$data = $request->all();
 			$data['created_by'] = auth()->user()->context_id;
 			$insert = Contact::create(array_filter($data, function ($value) {

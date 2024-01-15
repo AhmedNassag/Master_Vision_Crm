@@ -489,7 +489,7 @@
 
     @can('Contacts-create')
         <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -503,8 +503,6 @@
                     ]) !!}
                     <div class="modal-body">
                         <div class="box-body">
-
-
                             @la_input($module, 'customer_id')
                             @la_input($module, 'name')
                             @la_input($module, 'mobile')

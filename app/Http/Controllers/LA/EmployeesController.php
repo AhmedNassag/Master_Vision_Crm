@@ -325,6 +325,7 @@ class EmployeesController extends Controller
 	public function dtajax()
 	{
 		$values = DB::table('employees')->select($this->listing_cols)->whereNull('deleted_at')->where("id","!=",1);
+		
 		if (\Auth()->user()->roles[0]['view_dept']) {
 			$values->where("dept",\Auth()->user()->employee->dept);
 		}
@@ -386,6 +387,7 @@ class EmployeesController extends Controller
 		$data->data[$i]->id = $i+1;
                 }
 		$out->setData($data);
+		// return response()->json($out);
 		return $out;
 	}
 

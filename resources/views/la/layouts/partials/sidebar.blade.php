@@ -1,9 +1,7 @@
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
-
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-
         <!-- Sidebar user panel (optional) -->
         @if (! Auth::guest())
             <div class="user-panel">
@@ -17,7 +15,6 @@
                 </div>
             </div>
         @endif
-
         <!-- search form (Optional) -->
         @if(LAConfigs::getByKey('sidebar_search'))
         <form action="#" method="get" class="sidebar-form">
@@ -30,20 +27,23 @@
         </form>
         @endif
         <!-- /.search form -->
-
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">MODULES</li>
             <!-- Optionally, you can add icons to the links -->
-            <li><a href="{{ url(config('laraadmin.adminRoute')) }}"><i class='fa fa-home'></i> <span>{{trans('admin.Dashboard')}}</span></a></li>
+            <li>
+                <a href="{{ url(config('laraadmin.adminRoute')) }}">
+                    <i class='fa fa-home'></i> <span>{{trans('admin.Dashboard')}}</span>
+                </a>
+            </li>
             <?php
-            $module =!empty($module)?$module:null;
-            $menuItems = Dwij\Laraadmin\Models\Menu::where("parent", 0)->orderBy('hierarchy', 'asc')->get();
+                $module =!empty($module)?$module:null;
+                $menuItems = Dwij\Laraadmin\Models\Menu::where("parent", 0)->orderBy('hierarchy', 'asc')->get();
             ?>
             @foreach ($menuItems as $menu)
                 @if($menu->type == "module")
                     <?php
-                    $temp_module_obj = Module::get($menu->name);
+                        $temp_module_obj = Module::get($menu->name);
                     ?>
                     @la_access($temp_module_obj->id)
 						@if(isset($module->id) && $module->name == $menu->name)
@@ -57,8 +57,8 @@
                 @endif
             @endforeach
             <!-- LAMenus -->
-            
-        </ul><!-- /.sidebar-menu -->
+        </ul>
+        <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
 </aside>
