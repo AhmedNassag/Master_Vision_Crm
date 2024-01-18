@@ -355,28 +355,31 @@ class EmployeesController extends Controller
                     $data->data[$i]->$col=!empty($data->data[$i]->$col)?trans('admin.Yes'):trans('admin.No');
                 }
 			}
-                        $target_output='';
-                        if(Module::hasAccess("Employee_targets", "view"))
-                        {
-                            $target= Employee_target::where("employee_id",$data->data[$i]->id)->where("month",date("Y-m"))->first();
-                            if(!empty($target->target_amount))
-                            {
-                                $did_amount=Invoice::where('created_by',$data->data[$i]->id)->sum("total_amount");
-                                $target_output .=$did_amount. " / ".$target->target_amount." ".$currency ." (".floor($did_amount/$target->target_amount*100)."%)<br>";
-                            }
-                            if(!empty($target->target_amount))
-                            {
-                                $did_meetings=Meeting::where("created_by",$data->data[$i]->id)->count();
-                                $target_output .=$did_meetings. " / ".$target->target_meeting." Calls / Meetings (".floor($did_meetings/$target->target_meeting*100)."%)";
-                            }
-                        }
-                        $data->data[$i]->target=$target_output;
+
+			$target_output='';
+			if(Module::hasAccess("Employee_targets", "view"))
+			{
+				$target= Employee_target::where("employee_id",$data->data[$i]->id)->where("month",date("M-Y"))->first();
+				
+				if(!empty($target->target_amount))
+				{
+					$did_amount=Invoice::where('created_by',$data->data[$i]->id)->sum("total_amount");
+					$target_output .=$did_amount. " / ".$target->target_amount." ".$currency ." (".floor($did_amount/$target->target_amount*100)."%)<br>";
+				}
+				if(!empty($target->target_amount))
+				{
+					$did_meetings=Meeting::where("created_by",$data->data[$i]->id)->count();
+					$target_output .=$did_meetings. " / ".$target->target_meeting." Calls / Meetings (".floor($did_meetings/$target->target_meeting*100)."%)";
+				}
+			}
+			$data->data[$i]->target=$target_output;
+			
 			if($this->show_action) {
 				$output = '';
 				if(Module::hasAccess("Employees", "edit")) {
 					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/employees/'.$data->data[$i]->id.'/edit').'" class="btn btn-warning btn-xs" style=""><i class="fa fa-edit"></i></a>';
 				}
-
+				
 				if(Module::hasAccess("Employees", "delete")) {
 					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.employees.destroy', $data->data[$i]->id], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger deleteFormBtn btn-xs" type="submit"><i class="fa fa-times"></i></button>';
@@ -384,10 +387,10 @@ class EmployeesController extends Controller
 				}
 				$data->data[$i]->action = (string)$output;
 			}
-		$data->data[$i]->id = $i+1;
-                }
+			$data->data[$i]->id = $i+1;
+        }
+		
 		$out->setData($data);
-		// return response()->json($out);
 		return $out;
 	}
 

@@ -139,7 +139,7 @@ class ReportsController extends Controller
             foreach ($employees as $employee) {
                 // Get the target for the current employee and year
                 $target = Employee_target::where('employee_id', $employee->id)
-                    ->where('month', $request->month)
+                    ->where('month', Carbon::create($request->month)->format('M-Y'))
                     ->sum('target_amount');
 
                 // Get the actual total amount for invoices created by the current employee and year

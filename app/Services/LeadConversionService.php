@@ -120,5 +120,6 @@ class LeadConversionService
         $leadHistoryService = new LeadHistoryService();
         $leadHistoryService->logAction($data);
         return $lead;
+
     }
 }

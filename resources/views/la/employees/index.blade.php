@@ -32,16 +32,16 @@
 					@foreach( $listing_cols as $col )
 					<th>{{ !empty($module->fields[$col]) && !empty($module->fields[$col]['label'])? trans('admin.'.$module->fields[$col]['label']) : ucfirst($col) }}</th>
 					@endforeach
-								@la_access("Employee_targets", "view")
-								<th>{{trans("admin.Target")}}</th>
-								@endla_access
-								@if($show_actions)
-					<th>{{trans("admin.Actions")}}</th>
+						@la_access("Employee_targets", "view")
+							<th>{{trans("admin.Target")}}</th>
+						@endla_access
+						@if($show_actions)
+					        <th>{{trans("admin.Actions")}}</th>
 					@endif
 				</tr>
 			</thead>
 			<tbody>
-				
+
 			</tbody>
 		</table>
 	</div>
@@ -59,7 +59,7 @@
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
-				
+
 					{{--
 					@la_input($module, 'name')
 					@la_input($module, 'mobile')
@@ -67,7 +67,7 @@
 					@la_input($module, 'dept')
 					@la_input($module, 'active')
 					--}}
-						
+
 					<div class="form-group">
 						<label for="password">{{trans("admin.password")}}* :</label>
 						<input class="form-control valid" placeholder="{{trans("admin.Enter Password")}}" data-rule-maxlength="256" required="1" name="password" type="password" value="" aria-required="true" aria-invalid="false">
@@ -75,13 +75,12 @@
 					<div class="form-group">
 						<label for="role">{{trans("admin.Role")}}* :</label>
 						<select class="form-control" required="1" data-placeholder="Select Role" rel="select2" name="role">
-							
-                                                    @php 
-                                                        $parent=\Auth::user()->roles[0]->id;
-														$roles = \App\Role::find($parent)->getAllChildRoles($parent); 
-													@endphp
+                            @php
+                                $parent=\Auth::user()->roles[0]->id;
+                                $roles = \App\Role::find($parent)->getAllChildRoles($parent);
+                            @endphp
 							@foreach($roles as $role)
-									<option value="{{ $role->id }}">{{ $role->name }}</option>
+								<option value="{{ $role->id }}">{{ $role->name }}</option>
 							@endforeach
 						</select>
 					</div>
@@ -129,9 +128,9 @@ $(function () {
 			@endif
         ]
 	});
-        
+
 	$("#employee-add-form").validate({
-		
+
 	});
 });
 </script>

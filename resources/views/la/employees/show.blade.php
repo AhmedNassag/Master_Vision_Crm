@@ -60,7 +60,7 @@
 						@la_display($module, 'dept')
 						@la_display($module, 'branch_id')
 						@la_display($module, 'active')
-						</div>
+					</div>
 				</div>
 			</div>
 		</div>
